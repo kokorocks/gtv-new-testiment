@@ -2,11 +2,11 @@ import asyncio
 import json
 import googletrans
 import random
-def translate_book(BOOK_NAME = "matthew"):
+def translate_book(BOOK_NAME = "matthew",path=None):
     translated={}
     from fp.fp import FreeProxy
 
-    with open(f'json/{BOOK_NAME}_greek.json', 'r', encoding='utf-8') as f:
+    with open(f'{path}{BOOK_NAME}_greek.json', 'r', encoding='utf-8') as f:
         chapters = json.load(f)
 
     async def translate_book(chapters):
@@ -39,7 +39,7 @@ def translate_book(BOOK_NAME = "matthew"):
                         proxy = FreeProxy(rand=True).get()
 
 
-        with open(f"json/{BOOK_NAME}_translated.json", "w", encoding="utf-8") as f:
+        with open(f"{path}{BOOK_NAME}_translated.json", "w", encoding="utf-8") as f:
             json.dump(translated, f, ensure_ascii=False, indent=4)
 
             #for response in translated_text:
